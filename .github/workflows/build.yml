@@ -1,23 +1,18 @@
 name: Build APK
 on: [push]
-
 jobs:
   build:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-
       - name: Setup.NET 8
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
-
       - name: Install Android Workload
         run: dotnet workload install android
-
       - name: Build APK
         run: dotnet publish -f net8.0-android -c Release -o./apk
-
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
