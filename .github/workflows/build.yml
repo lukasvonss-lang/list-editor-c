@@ -12,7 +12,9 @@ jobs:
       - name: Install Android Workload
         run: dotnet workload install android
       - name: Build APK
-        run: dotnet publish -f net8.0-android -c Release -o./apk
+        run: |
+          ls -R
+          dotnet publish VogelApp.csproj -f net8.0-android -c Release -o./apk || dotnet publish VogelApp/VogelApp.csproj -f net8.0-android -c Release -o./apk || dotnet publish **/*.csproj -f net8.0-android -c Release -o./apk
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
